@@ -1,3 +1,4 @@
+package com.blog.demo.model;
 import java.time.LocalDateTime;
 
 public class Post {
@@ -7,10 +8,10 @@ private String subject;
 private LocalDateTime createdAt; 
 
 Post(){
-    comment = "";
-    user = "";
-    subject = ""; 
-    createdAt = LocalDateTime.now();
+    this.comment = "";
+    this.user = "";
+    this.subject = ""; 
+    this.createdAt = LocalDateTime.now();
     }
 
 

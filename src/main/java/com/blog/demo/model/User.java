@@ -1,23 +1,40 @@
+package com.blog.demo.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
-   public String userName;
-   public String firstName; 
-   public String lastName;
-   public String email;
-   private Integer userID; 
+    @Id
+    private Integer userID; 
+    private String userName;
+    private String firstName; 
+    private String lastName;
+    private String email;
+    private String name;
+    
+   public User(String firstName){
 
-   public User(){
-
-        userName = "";
-        firstName = "";
-        lastName = "";
-        email = "";
-        userID = 0;
+        this.userID = 0;
+        this.userName = "";
+        this.firstName = firstName;
+        this.lastName = "";
+        this.email = "";
+        this.name = "";
+        
 //determine props of the user
 //create getter/setters
 //create a model for a post
 //stretch goal - how to wire this in spring boot
    }
 
+   public String getName(){
+    return name;
+   }
+
+   public void setName(String name){
+    this.name = name;
+   }
 
    public String getFirstName(){
      return firstName;

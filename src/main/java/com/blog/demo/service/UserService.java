@@ -6,30 +6,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class UserService {
- //   @Autowired
-   // private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;//dependency injection
 
-
-    public String getUserByID(Integer UserId){
-    /*
-    - find the users ID
-    - return the username 
-    */
-        return "";
+    public User findByName(String name){
+        return userRepository.findByName(name);
+    }
+    public User getUserByID(Integer UserId){
+       return userRepository.findByUserID(UserId);
     }
 
     public User createUser(User user){
-    /*
-    input: a user profile(email, full name)
-
-    actions: create an instance of a user
-
-    output: return a new user - userId
-    */
-        return null;
+        return userRepository.save(user);
     }
-//delete user
-//update user
+
+    public void deleteUserById(Integer UserId){
+        //find the user
+        User user = userRepository.findByUserID(UserId);
+
+        //delete user from database
+        userRepository.delete(user);
+    }
+
+    public User updateUserByID(Integer UserId){
+        //find the user
+        User user = userRepository.findByUserID(UserId);
+
+        //modify attributes of the user
+        user.setName("");
+        user.setEmail("");
+        user.setFirstname("");
+        user.setLastName("");
+        user.setUserName("");
+        
+        return userRepository.save(user);
+    }
 
 
-}
+}//Service

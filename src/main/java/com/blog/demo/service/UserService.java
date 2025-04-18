@@ -9,14 +9,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;//dependency injection
 
-    public User findByName(String name){
-        return userRepository.findByName(name);
-    }
-    public User getUserByID(Integer UserId){
+   
+    public User findUserByID(Integer UserId){
        return userRepository.findByUserID(UserId);
     }
 
     public User createUser(User user){
+        //add the properties to create the user
         return userRepository.save(user);
     }
 

@@ -22,23 +22,23 @@ private UserService userService;
     }
 
     @PostMapping("/update/user")
-    public User updateUser(User userID){
+    public User updateUser(Integer userID){
         return userService.updateUserByID(userID);
     }
 
     @DeleteMapping("/deleteUser")
-    public User deleteUser(User userID){
-        return userService.deleteUserById(userID);
+    public void deleteUser(Integer userID){
+        userService.deleteUserById(userID);
+        
     }
 
-    @GetMapping
-    public User findUserName(User name){
-        return userService.findUserName(name);
-    }
+  
+    /* Get request at (routename) that returns a user that receives a name 
+    and that uses the userservice method find username function */
 
-    @GetMapping
-    public User findUserById(User userID){
-        return userService.findByUserID(userID);
+    @GetMapping("/findUserById")
+    public User findUserByID(Integer userID){
+        return userService.findUserByID(userID);
     }
 
 

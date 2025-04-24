@@ -1,7 +1,7 @@
 package com.blog.demo.model;
 
 import javax.annotation.processing.Generated;
-
+import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +11,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private Integer userID; 
     private String userName;
+    @NotBlank(message = "Firstname cannot be blank")
     private String firstName; 
     private String lastName;
     private String email;
@@ -26,6 +27,7 @@ public class User {
     this.name = name;
    }
 
+   
    public String getFirstName(){
      return firstName;
     }

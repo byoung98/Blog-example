@@ -19,12 +19,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void deleteUserById(Integer UserId){
-        //find the user
-        User user = userRepository.findByUserID(UserId);
+    public boolean deleteUserById(Integer UserId){
+       User user = userRepository.findByUserID(UserId);
 
-        //delete user from database
-        userRepository.delete(user);
+        //if user does exist - return true
+        if(userRepository.existsById(UserId)){
+            userRepository.delete(user);
+            return true;
+        }
+        //if user does not exist - retrn false
+            return false;        
     }
 
     public User updateUserByID(Integer UserId){

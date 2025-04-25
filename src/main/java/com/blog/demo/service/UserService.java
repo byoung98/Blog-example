@@ -31,19 +31,23 @@ public class UserService {
             return false;        
     }
 
-    public User updateUserByID(Integer UserId){
-        //find the user
-        User user = userRepository.findByUserID(UserId);
-
-        //modify attributes of the user
-        user.setName("");
-        user.setEmail("");
-        user.setFirstname("");
-        user.setLastName("");
-        user.setUserName("");
+    public User updateUserByID(Integer UserId, User updatedUser){
+        //find the user and 
+        User currentUser = userRepository.findByUserID(UserId);
         
-        return userRepository.save(user);
+        //check if user exists
+        if(userRepository.existsById(UserId)){
+        //modify attributes of the user
+        currentUser.setName(updatedUser.getName());
+        currentUser.setEmail(updatedUser.getEmail());
+        currentUser.setFirstname(updatedUser.getFirstName());
+        currentUser.setLastName(updatedUser.getLastName());
+        currentUser.setUserName(updatedUser.getUsername());
+
+        //save changes in database
+        //return updatedUser = userRepository.save(user);
+       return updatedUser = userRepository.save(currentUser);
+        }
+        return null; //user not found
     }
-
-
 }//Service

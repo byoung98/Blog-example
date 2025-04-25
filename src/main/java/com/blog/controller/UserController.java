@@ -30,15 +30,18 @@ private UserService userService;
     }
 
     @PostMapping("/update/user")
-    public User updateUser(Integer userID){
-        return userService.updateUserByID(userID);
+    public ResponseEntity <String> updateUser(@RequestBody Integer userID, User updatedUser){
+         
+        //check if the user was updated
+        if (userService.updateUserByID(userID,updatedUser)!= null){
+            
+            return new  ResponseEntity <String>("User updated",HttpStatusCode.valueOf(201));
+        }
+            return new  ResponseEntity <String>("User not found",HttpStatusCode.valueOf(404));
     }
 
-
-    //work on deleting a user using parameter(postman).. validate via the database
     @DeleteMapping("/deleteUser")
     public ResponseEntity<String> deleteUser(@RequestParam Integer userID){
-
          //if the user is found and delete
          if(userService.deleteUserById(userID) == true){   
           return new ResponseEntity<>("User Deleted",HttpStatusCode.valueOf(201));
@@ -51,7 +54,6 @@ private UserService userService;
 
     /* Get request at (routename) that returns a user that receives a name 
     and that uses the userservice method find username function */
-
     @GetMapping("/findUserById")
     public User findUserByID(Integer userID){
         return userService.findUserByID(userID);

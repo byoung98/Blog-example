@@ -11,7 +11,14 @@ public class UserService {
 
    
     public User findUserByID(Integer UserId){
-       return userRepository.findByUserID(UserId);
+        //validate if user exists
+        if(userRepository.existsById(UserId)){
+            return userRepository.findByUserID(UserId);
+        }
+            else
+        {
+           return null;
+        }
     }
 
     public User createUser(User user){
@@ -45,7 +52,6 @@ public class UserService {
         currentUser.setUserName(updatedUser.getUsername());
 
         //save changes in database
-        //return updatedUser = userRepository.save(user);
        return updatedUser = userRepository.save(currentUser);
         }
         return null; //user not found

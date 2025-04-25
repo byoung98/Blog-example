@@ -3,6 +3,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatusCode;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,9 +56,13 @@ private UserService userService;
     /* Get request at (routename) that returns a user that receives a name 
     and that uses the userservice method find username function */
     @GetMapping("/findUserById")
-    public User findUserByID(Integer userID){
-        return userService.findUserByID(userID);
+    public ResponseEntity <String> findUserByID(@PathVariable Integer userID){
+        //check if user exists
+        if(findUserByID(userID)!=null){
+            return new ResponseEntity<>("User Found",HttpStatusCode.valueOf(201));
+        }else{
+            return new ResponseEntity<>("User Not Found",HttpStatusCode.valueOf(404));
+        }
+
     }
-
-
 }//Service

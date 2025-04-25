@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation .Autowired;
 import com.blog.demo.service.UserService;
 import com.blog.demo.model.User;
 import java.net.http.HttpRequest;
@@ -30,8 +30,8 @@ private UserService userService;
         return new ResponseEntity <String>("Created",HttpStatusCode.valueOf(201));
     }
 
-    @PostMapping("/update/user")
-    public ResponseEntity <String> updateUser(@RequestBody Integer userID, User updatedUser){
+    @PostMapping("/update/user/{userID}")
+    public ResponseEntity <String> updateUser(@PathVariable Integer userID,@RequestBody User updatedUser){
          
         //check if the user was updated
         if (userService.updateUserByID(userID,updatedUser)!= null){
@@ -55,7 +55,7 @@ private UserService userService;
 
     /* Get request at (routename) that returns a user that receives a name 
     and that uses the userservice method find username function */
-    @GetMapping("/findUserById")
+    @GetMapping("/findUserById/{userID}")
     public ResponseEntity <String> findUserByID(@PathVariable Integer userID){
         //check if user exists
         if(findUserByID(userID)!=null){

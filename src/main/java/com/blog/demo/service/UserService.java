@@ -39,11 +39,12 @@ public class UserService {
     }
 
     public User updateUserByID(Integer UserId, User updatedUser){
-        //find the user and 
+        //find the user 
         User currentUser = userRepository.findByUserID(UserId);
         
         //check if user exists
-        if(userRepository.existsById(UserId)){
+        if(currentUser!= null){
+    
         //modify attributes of the user
         currentUser.setName(updatedUser.getName());
         currentUser.setEmail(updatedUser.getEmail());
